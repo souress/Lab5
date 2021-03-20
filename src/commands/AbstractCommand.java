@@ -1,6 +1,6 @@
 package commands;
 
-abstract class AbstractCommand {
+public abstract class AbstractCommand {
     private String name;
     private String description;
 
@@ -17,7 +17,7 @@ abstract class AbstractCommand {
         return description;
     }
 
-    abstract boolean execute(String argument);
+    public abstract boolean execute(String argument);
 
     @Override
     public String toString() {
