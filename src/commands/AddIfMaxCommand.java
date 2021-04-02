@@ -8,7 +8,7 @@ public class AddIfMaxCommand extends AbstractCommand {
     }
 
     @Override
-    public boolean execute(String argument) {
-
+    public void execute(String argument) {
+        System.out.println("ADD_IF_MAX_COMMAND_EXECUTED");
     }
 }

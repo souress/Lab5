@@ -8,7 +8,7 @@ public class PrintFieldDescendingHeightCommand extends AbstractCommand {
     }
 
     @Override
-    public boolean execute(String argument) {
-
+    public void execute(String argument) {
+        System.out.println("PRINT_FIELD_DESCENDING_HEIGHT_EXECUTED");
     }
 }

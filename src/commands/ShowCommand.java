@@ -7,7 +7,7 @@ public class ShowCommand extends AbstractCommand {
     }
 
     @Override
-    public boolean execute(String argument) {
-
+    public void execute(String argument) {
+        System.out.println("SHOW_COMMAND_EXECUTED");
     }
 }

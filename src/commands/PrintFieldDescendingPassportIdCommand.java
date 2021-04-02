@@ -8,7 +8,7 @@ public class PrintFieldDescendingPassportIdCommand extends AbstractCommand {
     }
 
     @Override
-    public boolean execute(String argument) {
-
+    public void execute(String argument) {
+        System.out.println("PRINT_FIELD_DESCENDING_PASSPORT_ID_COMMAND_EXECUTED");
     }
 }

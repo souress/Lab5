@@ -7,8 +7,7 @@ public class HelpCommand extends AbstractCommand {
     }
 
     @Override
-    public boolean execute(String argument) {
-        if (argument.isEmpty())
-        return false;
+    public void execute(String argument) {
+        System.out.println("HELP_COMMAND_EXECUTED");
     }
 }

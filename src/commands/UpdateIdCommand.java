@@ -7,7 +7,7 @@ public class UpdateIdCommand extends AbstractCommand {
     }
 
     @Override
-    public boolean execute(String argument) {
-
+    public void execute(String argument) {
+        System.out.println("UPDATE_ID_COMMAND_EXECUTED");
     }
 }

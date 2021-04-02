@@ -7,7 +7,7 @@ public class ClearCommand extends AbstractCommand {
     }
 
     @Override
-    public boolean execute(String argument) {
-
+    public void execute(String argument) {
+        System.out.println("CLEAR_COMMAND_EXECUTED");
     }
 }

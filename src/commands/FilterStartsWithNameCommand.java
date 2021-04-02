@@ -8,8 +8,7 @@ public class FilterStartsWithNameCommand extends AbstractCommand {
     }
 
     @Override
-    public boolean execute(String argument) {
-
-        return false;
+    public void execute(String argument) {
+        System.out.println("FILTER_STARTS_WITH_NAME_COMMAND_EXECUTED");
     }
 }

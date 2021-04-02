@@ -7,7 +7,7 @@ public class RemoveByIdCommand extends AbstractCommand {
     }
 
     @Override
-    public boolean execute(String argument) {
-
+    public void execute(String argument) {
+        System.out.println("REMOVE_BY_ID_COMMAND_EXECUTED");
     }
 }

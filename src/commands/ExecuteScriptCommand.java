@@ -7,8 +7,7 @@ public class ExecuteScriptCommand extends AbstractCommand {
     }
 
     @Override
-    public boolean execute(String argument) {
-
-        return false;
+    public void execute(String argument) {
+        System.out.println("EXECUTE_SCRIPT_COMMAND_EXECUTED");
     }
 }

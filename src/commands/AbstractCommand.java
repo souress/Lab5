@@ -17,7 +17,7 @@ public abstract class AbstractCommand {
         return description;
     }
 
-    public abstract boolean execute(String argument);
+    public abstract void execute(String argument);
 
     @Override
     public String toString() {

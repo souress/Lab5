@@ -17,6 +17,7 @@ public class CommandManager {
     private InfoCommand infoCommand;
     private PrintFieldDescendingHeightCommand printFieldDescendingHeightCommand;
     private PrintFieldDescendingPassportIdCommand printFieldDescendingPassportIdCommand;
+    private RemoveByIdCommand removeByIdCommand;
     private RemoveGreaterCommand removeGreaterCommand;
     private RemoveLowerCommand removeLowerCommand;
     private SaveCommand saveCommand;
@@ -24,7 +25,7 @@ public class CommandManager {
     private UpdateIdCommand updateIdCommand;
 
     public CommandManager(HelpCommand helpCommand, AddCommand addCommand, AddIfMaxCommand addIfMaxCommand, ClearCommand clearCommand,
-                          ExecuteScriptCommand executeScriptCommand, ExitCommand exitCommand,
+                          ExecuteScriptCommand executeScriptCommand, ExitCommand exitCommand, RemoveByIdCommand removeByIdCommand,
                           FilterStartsWithNameCommand filterStartsWithNameCommand, InfoCommand infoCommand,
                           PrintFieldDescendingHeightCommand printFieldDescendingHeightCommand,
                           PrintFieldDescendingPassportIdCommand printFieldDescendingPassportIdCommand, RemoveGreaterCommand removeGreaterCommand,
@@ -35,6 +36,7 @@ public class CommandManager {
         this.clearCommand = clearCommand;
         this.executeScriptCommand = executeScriptCommand;
         this.exitCommand = exitCommand;
+        this.removeByIdCommand= removeByIdCommand;
         this.filterStartsWithNameCommand = filterStartsWithNameCommand;
         this.infoCommand = infoCommand;
         this.printFieldDescendingHeightCommand = printFieldDescendingHeightCommand;
@@ -51,6 +53,7 @@ public class CommandManager {
         commands.add(clearCommand);
         commands.add(executeScriptCommand);
         commands.add(exitCommand);
+        commands.add(removeByIdCommand);
         commands.add(filterStartsWithNameCommand);
         commands.add(infoCommand);
         commands.add(printFieldDescendingHeightCommand);

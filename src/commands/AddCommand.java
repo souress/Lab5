@@ -7,7 +7,7 @@ public class AddCommand extends AbstractCommand {
     }
 
     @Override
-    public boolean execute(String argument) {
-
+    public void execute(String argument) {
+        System.out.println("ADD_COMMAND_EXECUTED");
     }
 }

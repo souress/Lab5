@@ -7,8 +7,7 @@ public class InfoCommand extends AbstractCommand {
     }
 
     @Override
-    public boolean execute(String argument) {
-
-        return false;
+    public void execute(String argument) {
+        System.out.println("INFO_COMMAND_EXECUTED");
     }
 }

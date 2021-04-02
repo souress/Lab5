@@ -7,7 +7,7 @@ public class RemoveLowerCommand extends AbstractCommand {
     }
 
     @Override
-    public boolean execute(String argument) {
-
+    public void execute(String argument) {
+        System.out.println("REMOVE_LOWER_COMMAND_EXECUTED");
     }
 }
