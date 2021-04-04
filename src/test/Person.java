@@ -1,5 +1,7 @@
 package test;
 
+import java.time.ZonedDateTime;
+
 public class Person {
     private Integer id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
@@ -10,5 +12,19 @@ public class Person {
     private Color hairColor; //Поле не может быть null
     private Country nationality; //Поле может быть null
     private Location location; //Поле не может быть null
+
+    public Person(Integer id, String name, Coordinates coordinates, ZonedDateTime creationDate, double height,
+                  String passportID, Color hairColor, Country nationality, Location location) {
+        this.id = id;
+        this.name = name;
+        this.coordinates = coordinates;
+        this.creationDate = creationDate;
+        this.height = height;
+        this.passportID = passportID;
+        this.hairColor = hairColor;
+        this.nationality = nationality;
+        this.location = location;
+    }
+
 }
 
