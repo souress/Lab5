@@ -8,4 +8,12 @@ public class Coordinates {
         this.x = x;
         this.y =y;
     }
+
+    public Long getCoordinateX() {
+        return x;
+    }
+
+    public double getCoordinateY() {
+        return y;
+    }
 }
