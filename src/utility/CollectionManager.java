@@ -1,6 +1,6 @@
 package utility;
 
-import test.Person;
+import data.Person;
 
 import java.time.ZonedDateTime;
 import java.util.HashSet;
@@ -19,5 +19,9 @@ public class CollectionManager {
     public String getFilePath() {
         System.out.println("Enter path to the xml-file: ");
         return console.readLine();
+    }
+
+    public HashSet<Person> getCollection() {
+        return collection;
     }
 }

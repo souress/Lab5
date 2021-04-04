@@ -1,11 +1,8 @@
 package utility;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.w3c.dom.*;
 import org.xml.sax.SAXException;
-import test.*;
+import data.*;
 
 import java.io.*;
 import java.time.ZonedDateTime;
@@ -13,7 +10,7 @@ import java.util.HashSet;
 
 import javax.xml.parsers.*;
 
-public class FileManager {
+public class FileManager implements ParseToBytes {
     private CollectionManager collectionManager;
 
     public FileManager(CollectionManager collectionManager) {
@@ -79,7 +76,53 @@ public class FileManager {
 
     public void parseToXml(String fileName) throws IOException {
         try (BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(fileName));) {
-            out.write()
+            out.write("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n".getBytes());
+            out.write("<collection>".getBytes());
+            for (Person person : collectionManager.getCollection()) {
+                out.write("<person>".getBytes());
+                out.write("<id>".getBytes());
+                out.write(person.getId().byteValue());
+                out.write("</id>\n".getBytes());
+                out.write("<name>".getBytes());
+                out.write(person.getName().getBytes());
+                out.write("</name>\n".getBytes());
+                out.write("<coordinates>\n".getBytes());
+                out.write("<coordinateX>".getBytes());
+                out.write(person.getId().byteValue());
+                out.write("</coordinateX>\n".getBytes());
+                out.write("<coordinateY>".getBytes());
+                out.write(person.getId().byteValue());
+                out.write("</coordinateY>\n".getBytes());
+                out.write("</coordinates>\n".getBytes());
+                out.write("<creationDate>".getBytes());
+                out.write(person.getCreationDate().toString().getBytes());
+                out.write("</creationDate>\n".getBytes());
+                out.write("<height>".getBytes());
+                out.write(ParseToBytes.doubleToBytes(person.getHeight()));
+                out.write("</height>\n".getBytes());
+                out.write("<passportID>".getBytes());
+                out.write(person.getPassportID().getBytes());
+                out.write("</passportID>\n".getBytes());
+                out.write("<hairColor>".getBytes());
+                out.write(person.getHairColor().toString().getBytes());
+                out.write("</hairColor>\n".getBytes());
+                out.write("<nationality>".getBytes());
+                out.write(person.getNationality().toString().getBytes());
+                out.write("</nationality>\n".getBytes());
+                out.write("<location>".getBytes());
+                out.write("<locationX>".getBytes());
+                out.write(ParseToBytes.longToBytes(person.getLocation().getLocationX()));
+                out.write("</locationX>\n".getBytes());
+                out.write("<locationY>".getBytes());
+                out.write(ParseToBytes.floatToBytes(person.getLocation().getLocationY()));
+                out.write("</locationY>\n".getBytes());
+                out.write("<locationZ>".getBytes());
+                out.write(ParseToBytes.longToBytes(person.getLocation().getLocationZ()));
+                out.write("</locationZ>\n".getBytes());
+                out.write("</location>\n".getBytes());
+                out.write("</person>".getBytes());
+            }
+            out.write("</collection>".getBytes());
         } catch (FileNotFoundException exception) {
             System.out.println(exception.getMessage());
         }

@@ -1,4 +1,4 @@
-package test;
+package data;
 
 public enum Color {
     RED,
