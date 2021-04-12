@@ -88,10 +88,10 @@ public class FileManager implements ParseToBytes {
                 out.write("</name>\n".getBytes());
                 out.write("<coordinates>\n".getBytes());
                 out.write("<coordinateX>".getBytes());
-                out.write(person.getId().byteValue());
+                out.write(person.getCoordinates().getCoordinateX().byteValue());
                 out.write("</coordinateX>\n".getBytes());
                 out.write("<coordinateY>".getBytes());
-                out.write(person.getId().byteValue());
+                out.write(ParseToBytes.doubleToBytes(person.getCoordinates().getCoordinateY()));
                 out.write("</coordinateY>\n".getBytes());
                 out.write("</coordinates>\n".getBytes());
                 out.write("<creationDate>".getBytes());
