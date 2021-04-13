@@ -61,5 +61,20 @@ public class Person {
     public Location getLocation() {
         return location;
     }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", coordinates=" + coordinates.toString() +
+                ", creationDate=" + creationDate +
+                ", height=" + height +
+                ", passportID='" + passportID + '\'' +
+                ", hairColor=" + hairColor +
+                ", nationality=" + nationality +
+                ", location=" + location.toString() +
+                '}';
+    }
 }
 

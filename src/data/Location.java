@@ -22,4 +22,13 @@ public class Location {
     public Long getLocationZ() {
         return z;
     }
+
+    @Override
+    public String toString() {
+        return "Location{" +
+                "x=" + x +
+                ", y=" + y +
+                ", z=" + z +
+                '}';
+    }
 }

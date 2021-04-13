@@ -11,7 +11,7 @@ import java.util.HashSet;
 import javax.xml.parsers.*;
 
 public class FileManager implements ParseToBytes {
-    private CollectionManager collectionManager;
+    private final CollectionManager collectionManager;
 
     public FileManager(CollectionManager collectionManager) {
         this.collectionManager = collectionManager;
@@ -74,31 +74,31 @@ public class FileManager implements ParseToBytes {
         return collectionFromFile;
     }
 
-    public void parseToXml(String fileName) throws IOException {
-        try (BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(fileName));) {
+    public void parseToXml(String fileName, HashSet<Person> collection) throws IOException {
+        try (BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(fileName))) {
             out.write("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n".getBytes());
-            out.write("<collection>".getBytes());
-            for (Person person : collectionManager.getCollection()) {
-                out.write("<person>".getBytes());
+            out.write("<collection>\n".getBytes());
+            for (Person person : collection) {
+                out.write("<person>\n".getBytes());
                 out.write("<id>".getBytes());
-                out.write(person.getId().byteValue());
+                out.write(person.getId().toString().getBytes());
                 out.write("</id>\n".getBytes());
                 out.write("<name>".getBytes());
                 out.write(person.getName().getBytes());
                 out.write("</name>\n".getBytes());
                 out.write("<coordinates>\n".getBytes());
                 out.write("<coordinateX>".getBytes());
-                out.write(person.getCoordinates().getCoordinateX().byteValue());
+                out.write(person.getCoordinates().getCoordinateX().toString().getBytes());
                 out.write("</coordinateX>\n".getBytes());
                 out.write("<coordinateY>".getBytes());
-                out.write(ParseToBytes.doubleToBytes(person.getCoordinates().getCoordinateY()));
+                out.write(((Double) person.getCoordinates().getCoordinateY()).toString().getBytes());
                 out.write("</coordinateY>\n".getBytes());
                 out.write("</coordinates>\n".getBytes());
                 out.write("<creationDate>".getBytes());
                 out.write(person.getCreationDate().toString().getBytes());
                 out.write("</creationDate>\n".getBytes());
                 out.write("<height>".getBytes());
-                out.write(ParseToBytes.doubleToBytes(person.getHeight()));
+                out.write(((Double) person.getHeight()).toString().getBytes());
                 out.write("</height>\n".getBytes());
                 out.write("<passportID>".getBytes());
                 out.write(person.getPassportID().getBytes());
@@ -109,15 +109,15 @@ public class FileManager implements ParseToBytes {
                 out.write("<nationality>".getBytes());
                 out.write(person.getNationality().toString().getBytes());
                 out.write("</nationality>\n".getBytes());
-                out.write("<location>".getBytes());
+                out.write("<location>\n".getBytes());
                 out.write("<locationX>".getBytes());
-                out.write(ParseToBytes.longToBytes(person.getLocation().getLocationX()));
+                out.write(((Long) person.getLocation().getLocationX()).toString().getBytes());
                 out.write("</locationX>\n".getBytes());
                 out.write("<locationY>".getBytes());
-                out.write(ParseToBytes.floatToBytes(person.getLocation().getLocationY()));
+                out.write(((Float) person.getLocation().getLocationY()).toString().getBytes());
                 out.write("</locationY>\n".getBytes());
                 out.write("<locationZ>".getBytes());
-                out.write(ParseToBytes.longToBytes(person.getLocation().getLocationZ()));
+                out.write(person.getLocation().getLocationZ().toString().getBytes());
                 out.write("</locationZ>\n".getBytes());
                 out.write("</location>\n".getBytes());
                 out.write("</person>".getBytes());

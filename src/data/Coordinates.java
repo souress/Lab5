@@ -16,4 +16,12 @@ public class Coordinates {
     public double getCoordinateY() {
         return y;
     }
+
+    @Override
+    public String toString() {
+        return "Coordinates{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
+    }
 }

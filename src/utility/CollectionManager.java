@@ -20,8 +20,4 @@ public class CollectionManager {
         System.out.println("Enter path to the xml-file: ");
         return console.readLine();
     }
-
-    public HashSet<Person> getCollection() {
-        return collection;
-    }
 }
