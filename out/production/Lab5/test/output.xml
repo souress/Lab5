@@ -1,24 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <collection>
 <person>
-<id>1</id>
-<name>person_1</name>
-<coordinates>
-<coordinateX>1200</coordinateX>
-<coordinateY>20.9</coordinateY>
-</coordinates>
-<creationDate>2021-04-04T11:30:52+03:00</creationDate>
-<height>190.5</height>
-<passportID>some id 1</passportID>
-<hairColor>RED</hairColor>
-<nationality>RUSSIA</nationality>
-<location>
-<locationX>140001</locationX>
-<locationY>0.321</locationY>
-<locationZ>123000123</locationZ>
-</location>
-</person>
-<person>
 <id>2</id>
 <name>person_2</name>
 <coordinates>
@@ -34,6 +16,24 @@
 <locationX>212312</locationX>
 <locationY>31231.32</locationY>
 <locationZ>13124112</locationZ>
+</location>
+</person>
+<person>
+<id>1</id>
+<name>person_1</name>
+<coordinates>
+<coordinateX>1200</coordinateX>
+<coordinateY>20.9</coordinateY>
+</coordinates>
+<creationDate>2021-04-04T11:30:52+03:00</creationDate>
+<height>160.5</height>
+<passportID>some id 1</passportID>
+<hairColor>RED</hairColor>
+<nationality>RUSSIA</nationality>
+<location>
+<locationX>140001</locationX>
+<locationY>0.321</locationY>
+<locationZ>123000123</locationZ>
 </location>
 </person>
 <person>

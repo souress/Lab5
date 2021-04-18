@@ -2,7 +2,7 @@ package data;
 
 import java.time.ZonedDateTime;
 
-public class Person {
+public class Person implements Comparable<Person> {
     private Integer id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
@@ -60,6 +60,15 @@ public class Person {
 
     public Location getLocation() {
         return location;
+    }
+
+    @Override
+    public int compareTo(Person person) {
+        Double heightThis = this.height;
+        Double heightPerson = person.height;
+        int result = heightPerson.compareTo(heightThis);
+        if (result == 0) this.name.compareTo(person.name);
+        return result;
     }
 
     @Override

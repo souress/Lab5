@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <collection>
     <person>
         <id>1</id>
@@ -8,7 +8,7 @@
             <coordinateY>20.9</coordinateY>
         </coordinates>
         <creationDate>2021-04-04T11:30:52+03:00</creationDate>
-        <height>180.5</height>
+        <height>190.5</height>
         <passportID>some id 1</passportID>
         <hairColor>RED</hairColor>
         <nationality>RUSSIA</nationality>
