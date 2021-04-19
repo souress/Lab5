@@ -58,9 +58,8 @@ public class CommandReceiver {
     }
 
     public void update(String id) {
-        Integer personId;
         try {
-            personId = Integer.parseInt(id);
+            Integer personId = Integer.parseInt(id);
             if (CollectionManager.checkExist(personId)) {
                 CollectionManager.update(PersonCreator.createPerson(), personId);
                 System.out.println("Элемент обновлен.");
@@ -140,7 +139,6 @@ public class CommandReceiver {
 
     public void save() throws ParserConfigurationException, TransformerException, IOException {
         FileManager.parseToXml(CollectionManager.getHashSet());
-        System.out.println("Коллекция записана в файл.");
     }
 
     public void exit() {

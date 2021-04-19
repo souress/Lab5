@@ -64,10 +64,6 @@ public class Person implements Comparable<Person> {
         return location;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public void setName(String name) {
         this.name = name;
     }

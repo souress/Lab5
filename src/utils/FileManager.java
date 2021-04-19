@@ -1,8 +1,7 @@
 package utils;
 
 import java.io.*;
-import java.util.Collection;
-import java.util.HashSet;
+import java.util.*;
 
 import javax.xml.parsers.*;
 import javax.xml.transform.*;
@@ -147,6 +146,7 @@ public class FileManager {
             transformer.setOutputProperty(OutputKeys.METHOD, "xml");
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             transformer.transform(new DOMSource(doc), new StreamResult(new BufferedOutputStream(new FileOutputStream(filePath))));
+            System.out.println("Коллекция записана в файл.");
         } catch (ParserConfigurationException | TransformerException | IOException exception) {
             System.out.println(exception.getMessage());
         }

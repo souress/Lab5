@@ -44,7 +44,7 @@ public class CollectionManager {
 
     public static boolean checkExist(Integer id) {
         for (Person person : CollectionManager.getHashSet()) {
-            return person.getId().equals(id);
+            if (person.getId().equals(id)) return true;
         }
         return false;
     }
@@ -53,23 +53,18 @@ public class CollectionManager {
         personHashSet.clear();
     }
 
-    public static void removeGreater(Person person) {//TODO добавить итератор + добавить sout
-//        personHashSet.forEach(person1 -> {
-//            if (person1.compareTo(person) > 0) personHashSet.remove(person1);
-//            else System.out.println("Наибольшего элемента не найдено.");
-//        });
-        Iterator<Person> iterator = personHashSet.iterator();
-        for (Person personIt : personHashSet) {
-            if (personIt.compareTo(person) > 0) personHashSet.remove(personIt);
-            else System.out.println("Наибольшего элемента не найдено.");
-        }
+    public static void removeGreater(Person person) {
+        int startSize = personHashSet.size();
+        personHashSet.removeIf(person1 -> person1.compareTo(person) < 0);
+        if (startSize > personHashSet.size()) System.out.println("Удалены элементы, превышающие заданный.");
+        else System.out.println("Элементов, превышающих заданный, не найдено.");
     }
 
     public static void removeLower(Person person) {
-        personHashSet.forEach(person1 -> {
-            if (person1.compareTo(person) < 0) personHashSet.remove(person1);
-            else System.out.println("Наименьшего элемента не найдено.");
-        });
+        int startSize = personHashSet.size();
+        personHashSet.removeIf(person1 -> person1.compareTo(person) > 0);
+        if (startSize > personHashSet.size()) System.out.println("Удалены элементы, меньшие заданного.");
+        else System.out.println("Элементов, меньших заданного, не найдено.");
     }
 
     public static void printFieldDescendingHeight() {

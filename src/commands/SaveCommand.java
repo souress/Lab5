@@ -20,7 +20,6 @@ public class SaveCommand extends AbstractCommand {
             System.out.println("Слишком много аргументов, команда приведена к базовому формату.");
         try {
             commandReceiver.save();
-            System.out.println("Коллекция записана в файл.");
         } catch (ParserConfigurationException | TransformerException | IOException exception) {
             exception.printStackTrace();
         }
