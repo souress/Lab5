@@ -1,13 +1,23 @@
 package commands;
 
-public class InfoCommand extends AbstractCommand {
+import commands.utils.CommandReceiver;
 
-    public InfoCommand() {
+public class InfoCommand extends AbstractCommand {
+    private final CommandReceiver commandReceiver;
+
+    public InfoCommand(CommandReceiver commandReceiver) {
         super("info", "вывести информацию о коллекции");
+        this.commandReceiver = commandReceiver;
     }
 
     @Override
-    public void execute(String argument) {
-        System.out.println("INFO_COMMAND_EXECUTED");
+    public void execute(String[] args) {
+        if (args.length > 1) System.out.println("Слишком много аргументов, команда приведена к базовому формату.");
+        commandReceiver.info();
+    }
+
+    @Override
+    public String writeInfo() {
+        return getName() + " - " + getDescription();
     }
 }

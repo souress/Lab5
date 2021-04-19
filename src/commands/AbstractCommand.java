@@ -17,12 +17,9 @@ public abstract class AbstractCommand {
         return description;
     }
 
-    public abstract void execute(String argument);
+    public abstract void execute(String[] args);
 
-    @Override
-    public String toString() {
-        return name + " (" + description + ")";
-    };
+    public abstract String writeInfo();
 
     @Override
     public int hashCode() {

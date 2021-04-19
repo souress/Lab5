@@ -1,24 +1,26 @@
 package data;
 
+import utils.IdGenerator;
+
 import java.time.ZonedDateTime;
 
 public class Person implements Comparable<Person> {
     private Integer id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
-    private java.time.ZonedDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
+    private final java.time.ZonedDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
     private double height; //Значение поля должно быть больше 0
     private String passportID; //Поле не может быть null
     private Color hairColor; //Поле не может быть null
     private Country nationality; //Поле может быть null
     private Location location; //Поле не может быть null
 
-    public Person(Integer id, String name, Coordinates coordinates, ZonedDateTime creationDate, double height,
+    public Person(String name, Coordinates coordinates, double height,
                   String passportID, Color hairColor, Country nationality, Location location) {
-        this.id = id;
+        id = IdGenerator.generateId();
         this.name = name;
         this.coordinates = coordinates;
-        this.creationDate = creationDate;
+        creationDate = ZonedDateTime.now();
         this.height = height;
         this.passportID = passportID;
         this.hairColor = hairColor;
@@ -62,28 +64,57 @@ public class Person implements Comparable<Person> {
         return location;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCoordinates(Coordinates coordinates) {
+        this.coordinates = coordinates;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    public void setPassportID(String passportID) {
+        this.passportID = passportID;
+    }
+
+    public void setHairColor(Color hairColor) {
+        this.hairColor = hairColor;
+    }
+
+    public void setNationality(Country nationality) {
+        this.nationality = nationality;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
     @Override
     public int compareTo(Person person) {
         Double heightThis = this.height;
         Double heightPerson = person.height;
-        int result = heightPerson.compareTo(heightThis);
-        if (result == 0) this.name.compareTo(person.name);
-        return result;
+        return heightPerson.compareTo(heightThis);
     }
 
     @Override
     public String toString() {
-        return "Person{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", coordinates=" + coordinates.toString() +
-                ", creationDate=" + creationDate +
-                ", height=" + height +
-                ", passportID='" + passportID + '\'' +
-                ", hairColor=" + hairColor +
-                ", nationality=" + nationality +
-                ", location=" + location.toString() +
-                '}';
+        return "Person:\n" +
+                "\tid: " + id +
+                "\n\tname: " + name +
+                "\n\tcoordinates: " + coordinates.toString() +
+                "\n\tcreationDate: " + creationDate +
+                "\n\theight=" + height +
+                "\n\tpassportID: " + passportID +
+                "\n\thairColor: " + hairColor +
+                "\n\tnationality: " + nationality +
+                "\n\tlocation: " + location.toString();
     }
 }
 

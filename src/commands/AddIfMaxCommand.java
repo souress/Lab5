@@ -1,14 +1,25 @@
 package commands;
 
-public class AddIfMaxCommand extends AbstractCommand {
+import commands.utils.CommandReceiver;
 
-    public AddIfMaxCommand() {
+public class AddIfMaxCommand extends AbstractCommand {
+    private final CommandReceiver commandReceiver;
+
+    public AddIfMaxCommand(CommandReceiver commandReceiver) {
         super("add_if_max {element}", "добавить новый элемент в коллекцию, если его значение превышает " +
                                                                         "значение наибольшего элемента этой коллекции");
+        this.commandReceiver = commandReceiver;
     }
 
     @Override
-    public void execute(String argument) {
-        System.out.println("ADD_IF_MAX_COMMAND_EXECUTED");
+    public void execute(String[] args) {
+        if (args.length > 1)
+            System.out.println("Слишком много аргументов, команда приведена к базовому формату.");
+        commandReceiver.addIfMax();
+    }
+
+    @Override
+    public String writeInfo() {
+        return getName() + " - " + getDescription();
     }
 }

@@ -1,14 +1,24 @@
 package commands;
 
-public class PrintFieldDescendingPassportIdCommand extends AbstractCommand {
+import commands.utils.CommandReceiver;
 
-    public PrintFieldDescendingPassportIdCommand() {
+public class PrintFieldDescendingPassportIdCommand extends AbstractCommand {
+    private final CommandReceiver commandReceiver;
+
+    public PrintFieldDescendingPassportIdCommand(CommandReceiver commandReceiver) {
         super("print_field_descending_passport_id", "вывести значения поля passportID всех элементов в" +
                                                                                                     " порядке убывания");
+        this.commandReceiver = commandReceiver;
     }
 
     @Override
-    public void execute(String argument) {
-        System.out.println("PRINT_FIELD_DESCENDING_PASSPORT_ID_COMMAND_EXECUTED");
+    public void execute(String[] args) {
+        if (args.length > 1) System.out.println("Слишком много аргументов, команда приведена к базовому формату.");
+        commandReceiver.printFieldDescendingPassportID();
+    }
+
+    @Override
+    public String writeInfo() {
+        return getName() + " - " + getDescription();
     }
 }

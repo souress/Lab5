@@ -2,17 +2,17 @@ package commands;
 
 import commands.utils.CommandReceiver;
 
-public class RemoveByIdCommand extends AbstractCommand {
+public class UpdateCommand extends AbstractCommand {
     private final CommandReceiver commandReceiver;
 
-    public RemoveByIdCommand(CommandReceiver commandReceiver) {
-        super("remove_by_id id", "удалить элемент из коллекции по его id");
+    public UpdateCommand(CommandReceiver commandReceiver) {
+        super("update <id> {element}", "обновить значение элемента коллекции по id");
         this.commandReceiver = commandReceiver;
     }
 
     @Override
     public void execute(String[] args) {
-        if (args.length == 2) commandReceiver.remove_by_id(args[1]);
+        if (args.length == 2) commandReceiver.update(args[1]);
         else System.out.println("Некорректное количество аргументов. Для справки напишите help.");
     }
 

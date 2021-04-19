@@ -1,14 +1,24 @@
 package commands;
 
-public class FilterStartsWithNameCommand extends AbstractCommand {
+import commands.utils.CommandReceiver;
 
-    public FilterStartsWithNameCommand() {
+public class FilterStartsWithNameCommand extends AbstractCommand {
+    private final CommandReceiver commandReceiver;
+
+    public FilterStartsWithNameCommand(CommandReceiver commandReceiver) {
         super("filter_starts_with_name name", "вывести элементы, значение поля name которых начинается" +
                                                                                                " с заданной подстроки");
+        this.commandReceiver = commandReceiver;
     }
 
     @Override
-    public void execute(String argument) {
-        System.out.println("FILTER_STARTS_WITH_NAME_COMMAND_EXECUTED");
+    public void execute(String[] args) {
+        if (args.length == 2) commandReceiver.filterStartsWithName(args[1]);
+        else System.out.println("Некорректное количество аргументов. Для справки напишите help.");
+    }
+
+    @Override
+    public String writeInfo() {
+        return getName() + " - " + getDescription();
     }
 }
