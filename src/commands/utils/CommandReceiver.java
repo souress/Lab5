@@ -76,10 +76,6 @@ public class CommandReceiver {
         CollectionManager.addIfMax(PersonCreator.createPerson());
     }
 
-    public void executeScript(String path) {
-
-    }
-
     public void printFieldDescendingHeight() {
         CollectionManager.printFieldDescendingHeight();
     }

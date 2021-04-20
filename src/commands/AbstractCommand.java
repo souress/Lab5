@@ -3,8 +3,8 @@ package commands;
 import java.io.FileNotFoundException;
 
 public abstract class AbstractCommand {
-    private String name;
-    private String description;
+    private final String name;
+    private final String description;
 
     public AbstractCommand(String name, String description) {
         this.name = name;

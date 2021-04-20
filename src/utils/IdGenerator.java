@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Random;
 
 public class IdGenerator {
-    private static HashSet<Integer> hashSetId = new HashSet<>();
+    private static final HashSet<Integer> hashSetId = new HashSet<>();
 
     public static Integer generateId() {
         Integer id = new Random().nextInt(Integer.MAX_VALUE);
