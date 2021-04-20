@@ -7,6 +7,8 @@ import javax.xml.parsers.*;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+
+import commands.utils.CommandReceiver;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 import data.*;
@@ -42,16 +44,22 @@ public class FileManager {
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                     Element element = (Element) node;
                     name = element.getElementsByTagName("name").item(0).getTextContent();
+                    if (name.equals("")) throw new NumberFormatException();
 
                     NodeList nodeListCoordinates = element.getElementsByTagName("coordinates");
                     Element elementCoordinates = (Element) nodeListCoordinates.item(0);
                     coordinateX = Long.parseLong(elementCoordinates.getElementsByTagName("coordinateX").item(0).getTextContent());
+                    if (coordinateX >= 51) throw new NumberFormatException();
                     coordinateY = Double.parseDouble(elementCoordinates.getElementsByTagName("coordinateY").item(0).getTextContent());
 
                     height = Double.parseDouble(element.getElementsByTagName("height").item(0).getTextContent());
+                    if (height <= 0) throw new NumberFormatException();
                     passportID = element.getElementsByTagName("passportID").item(0).getTextContent();
-                    hairColor = Color.valueOf(element.getElementsByTagName("hairColor").item(0).getTextContent());
-                    nationality = Country.valueOf(element.getElementsByTagName("nationality").item(0).getTextContent());
+                    if (passportID.equals("")) throw new NumberFormatException();
+                        hairColor = Color.valueOf(element.getElementsByTagName("hairColor").item(0).getTextContent());
+                    if (!element.getElementsByTagName("nationality").item(0).getTextContent().equals(""))
+                        nationality = Country.valueOf(element.getElementsByTagName("nationality").item(0).getTextContent());
+                    else nationality = null;
 
                     NodeList nodeListLocation = element.getElementsByTagName("location");
                     Element elementLocation = (Element) nodeListLocation.item(0);
@@ -71,8 +79,10 @@ public class FileManager {
             System.out.println("Недостаточно прав для открытия файла.");
         } catch (NullPointerException e) {
             System.out.println("В файле нет объектов");
+        } catch (IllegalArgumentException e){
+            System.out.println("Ошибка! Некоторые или все поля файла содержат недопустимые данные.");
+            System.exit(0);
         }
-
     }
 
     public static HashSet<Person> getPersonHashSet() {

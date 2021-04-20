@@ -86,12 +86,10 @@ public class CommandReceiver {
 
     public void executeScript(String path) {
         try(Scanner scanner = new Scanner("C:\\Users\\Кирилл\\IdeaProjects\\Lab5\\src\\test\\script")) {
-            String line
             while (scanner.hasNextLine()) {
-                scriptCommands.add(scanner.nextLine());
-            }
-            for (int i = 0; i < scriptCommands.size(); i++) {
-                commandInvoker.executeCommand();
+                if (!scanner.nextLine().equals("execute_script"))
+                    commandInvoker.executeCommand(scanner.nextLine().trim().split(" "));
+                else System.out.println("Пресечена попытка рекурсивного вызова скрипта");
             }
         }
     }
