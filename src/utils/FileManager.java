@@ -15,12 +15,13 @@ import org.xml.sax.SAXException;
 public class FileManager {
     private static final HashSet<Person> personHashSet = new HashSet<>();
 
-    private static final String filePath = "C:\\Users\\Кирилл\\IdeaProjects\\Lab5\\src\\test\\collection.xml";
+    private static String filePath;
 
-    public FileManager() {
+    public FileManager(String filePath) {
+        this.filePath = filePath;
     }
 
-    public static void parseFromXml() throws NullPointerException, SecurityException {
+    public void parseFromXml() throws NullPointerException, SecurityException {
         String name = null;
         Long coordinateX = null;
         double coordinateY = 0;
