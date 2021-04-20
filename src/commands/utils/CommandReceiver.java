@@ -1,19 +1,11 @@
 package commands.utils;
 
-import commands.AbstractCommand;
-import commands.ExecuteScriptCommand;
-import data.Person;
-import utils.CollectionManager;
-import utils.FileManager;
-import utils.PersonCreator;
+import commands.*;
+import utils.*;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 public class CommandReceiver {
     private final CommandInvoker commandInvoker;
@@ -85,13 +77,7 @@ public class CommandReceiver {
     }
 
     public void executeScript(String path) {
-        try(Scanner scanner = new Scanner("C:\\Users\\Кирилл\\IdeaProjects\\Lab5\\src\\test\\script")) {
-            while (scanner.hasNextLine()) {
-                if (!scanner.nextLine().equals("execute_script"))
-                    commandInvoker.executeCommand(scanner.nextLine().trim().split(" "));
-                else System.out.println("Пресечена попытка рекурсивного вызова скрипта");
-            }
-        }
+
     }
 
     public void printFieldDescendingHeight() {

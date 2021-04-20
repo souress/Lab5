@@ -1,5 +1,7 @@
 package commands;
 
+import java.io.FileNotFoundException;
+
 public abstract class AbstractCommand {
     private String name;
     private String description;
@@ -17,7 +19,7 @@ public abstract class AbstractCommand {
         return description;
     }
 
-    public abstract void execute(String[] args);
+    public abstract void execute(String[] args) throws FileNotFoundException;
 
     public abstract String writeInfo();
 

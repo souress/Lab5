@@ -4,10 +4,11 @@ import commands.*;
 import commands.utils.CommandInvoker;
 import commands.utils.CommandReceiver;
 
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class ConsoleManager {
-    public void startInteractiveMode() {
+    public void startInteractiveMode() throws FileNotFoundException {
         CommandInvoker commandInvoker = new CommandInvoker();
         CommandReceiver commandReceiver = new CommandReceiver(commandInvoker);
         CollectionManager.initHashSet();
@@ -16,7 +17,7 @@ public class ConsoleManager {
         commandInvoker.register("add", new AddCommand(commandReceiver));
         commandInvoker.register("add_if_max", new AddIfMaxCommand(commandReceiver));
         commandInvoker.register("clear", new ClearCommand(commandReceiver));
-        commandInvoker.register("execute_script", new ExecuteScriptCommand(commandReceiver));
+        commandInvoker.register("execute_script", new ExecuteScriptCommand(commandReceiver,commandInvoker));
         commandInvoker.register("exit", new ExitCommand(commandReceiver));
         commandInvoker.register("filter_starts_with_name", new FilterStartsWithNameCommand(commandReceiver));
         commandInvoker.register("info", new InfoCommand(commandReceiver));

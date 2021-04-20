@@ -2,6 +2,7 @@ package commands.utils;
 
 import commands.AbstractCommand;
 
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 
 public class CommandInvoker {
@@ -11,7 +12,7 @@ public class CommandInvoker {
         commandMap.put(commandName, command);
     }
 
-    public void executeCommand(String[] commandName) {
+    public void executeCommand(String[] commandName) throws FileNotFoundException {
         try {
             if (commandName.length > 0) {
                 AbstractCommand command = commandMap.get(commandName[0]);
