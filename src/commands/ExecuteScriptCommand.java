@@ -23,30 +23,29 @@ public class ExecuteScriptCommand extends AbstractCommand {
     @Override
     public void execute(String[] args) throws StackOverflowError, FileNotFoundException {
         String[] command;
-        boolean exit = false;
-        if (args.length != 2) System.out.println("Некорректное количество аргументов. Для справки напишите help.");
-        else {
-            path = args[1];
-            for (String com : calls) {
-                if (com.equals(args[1])) {
-                    exit = true;
-                    break;
-                }
-            }
-            if (exit) {
-                System.err.println("Предупреждение! Возможна бесконечная рекурсия: ");
-            } else {
+            if (args.length != 2) System.out.println("Некорректное количество аргументов. Для справки напишите help.");
+            else {
+                path = args[1];
                 Scanner scanner = new Scanner(new FileReader(args[1]));
                 String nextLine;
                 while (scanner.hasNextLine()) {
                     nextLine = scanner.nextLine();
-                    command = nextLine.split(" ");
-                    calls.add(args[0]);
-                    commandInvoker.executeCommand(command);
+                    try {
+                        if (nextLine.contains(path)){
+                            throw new StackOverflowError();
+                        }
+                    } catch (StackOverflowError error) {
+                        System.out.println("Ошибка! В скрипте была обнаружена рекурсия.");
+                    } finally {
+                        if (nextLine.contains(path))
+                            nextLine = scanner.nextLine();
+                        command = nextLine.split(" ");
+                        calls.add(args[0]);
+                        commandInvoker.executeCommand(command);
+                    }
                 }
                 commandReceiver.executeScript(path);
             }
-        }
     }
 
     @Override
