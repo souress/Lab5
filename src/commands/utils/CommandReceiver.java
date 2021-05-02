@@ -6,12 +6,15 @@ import utils.*;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import java.io.*;
+import java.util.*;
 
 public class CommandReceiver {
     private final CommandInvoker commandInvoker;
+    private final LinkedHashSet<String> pathSet;
 
     public CommandReceiver(CommandInvoker commandInvoker) {
         this.commandInvoker = commandInvoker;
+        pathSet = new LinkedHashSet<>();
     }
 
     public void add() {
@@ -36,6 +39,37 @@ public class CommandReceiver {
     public void clear() {
         CollectionManager.clear();
         System.out.println("Коллекция очищена");
+    }
+
+    public void execute_script(String[] args) throws FileNotFoundException {
+        if (args.length != 2) System.out.println("Некорректное количество аргументов. Для справки напишите help.");
+        else {
+            pathSet.add(args[1]);
+            Scanner scanner = new Scanner(new FileReader(args[1]));
+            dante:
+            {
+                while (scanner.hasNextLine()) {
+                    String nextLine = scanner.nextLine();
+                    try {
+                        for (String path : pathSet) {
+                            if (nextLine.contains(path))
+                                throw new StackOverflowError();
+                        }
+                    } catch (StackOverflowError error) {
+                        System.out.println("Обнаружен рекурсивный вызов скрипта! Попытка переполнения стека будет пресечена.");
+                    } finally {
+                        for (String path : pathSet) {
+                            if (nextLine.contains(path))
+                                if (scanner.hasNextLine())
+                                    nextLine = scanner.nextLine();
+                                else break dante;
+                        }
+                        String[] command = nextLine.split(" ");
+                        commandInvoker.executeCommand(command);
+                    }
+                }
+            }
+        }
     }
 
     public void remove_by_id(String id) {

@@ -12,14 +12,16 @@ public class CommandInvoker {
         commandMap.put(commandName, command);
     }
 
-    public void executeCommand(String[] commandName) throws FileNotFoundException {
+    public void executeCommand(String[] commandName) {
         try {
             if (commandName.length > 0) {
                 AbstractCommand command = commandMap.get(commandName[0]);
                 command.execute(commandName);
             } else System.out.println("Вы не ввели команду.");
-        } catch (IllegalStateException | NullPointerException exception) {
+        } catch (NullPointerException exception) {
             System.out.println("Не существует команды " + commandName[0] + ". Для справки используйте – help");
+        } catch (FileNotFoundException exception) {
+            System.out.println("Файл не найден.");
         }
     }
 

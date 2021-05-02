@@ -24,6 +24,15 @@ public class CollectionManager {
         personHashSet.add(person);
     }
 
+    public static Integer getMaxID() {
+        if (!personHashSet.isEmpty()) {
+            Integer maxId = personHashSet.iterator().next().getId();
+            for (Person person : personHashSet)
+                if (person.getId() > maxId) maxId = person.getId();
+            return maxId;
+        } else return 0;
+    }
+
     public static void getInfo() {
         System.out.printf("Тип коллекции - %s\n" +
                 "Дата инициализации коллекции - %s\n" +
@@ -32,7 +41,8 @@ public class CollectionManager {
     }
 
     public static void show() {
-        for (Person person : personHashSet) System.out.println(person.toString());
+        if (!personHashSet.isEmpty()) for (Person person : personHashSet) System.out.println(person.toString());
+        else System.out.println("Коллекция пуста");
     }
 
     public static void remove_by_id(Integer personId) {

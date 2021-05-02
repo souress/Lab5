@@ -15,15 +15,17 @@ public class CountryReader {
         System.out.print(messageForConsole + " Выберите страну из представленных(" + Arrays.asList(Country.values()) + "): ");
         String toBeContained = in.nextLine().trim();
 
-        if ((!checkExist(toBeContained)) && !canBeNull && !toBeContained.equals("") || !canBeNull && toBeContained.equals("") || canBeNull && !toBeContained.equals("")) {
+        if ((!checkExist(toBeContained)) && !canBeNull && !toBeContained.equals("") ||
+                !canBeNull && toBeContained.equals("") || canBeNull && !toBeContained.equals("")) {
             while (!checkExist(toBeContained)) {
                 System.out.print("Вы ввели несуществующее значение из представленных. Попробуйте снова: ");
                 toBeContained = in.nextLine().trim();
+                if (canBeNull && toBeContained.equals("")) return null;
                 checkExist(toBeContained);
             }
         }
 
-        if (canBeNull && toBeContained.equals("")) { return null; }
+        if (canBeNull && toBeContained.equals("")) return null;
 
         return Enum.valueOf(Country.class, toBeContained);
     }

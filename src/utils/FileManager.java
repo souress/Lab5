@@ -1,6 +1,7 @@
 package utils;
 
 import java.io.*;
+import java.time.ZonedDateTime;
 import java.util.*;
 import data.*;
 
@@ -11,6 +12,7 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 public class FileManager {
     private static final HashSet<Person> personHashSet = new HashSet<>();
@@ -18,13 +20,15 @@ public class FileManager {
     private static String filePath;
 
     public FileManager(String filePath) {
-        this.filePath = filePath;
+        FileManager.filePath = filePath;
     }
 
     public void parseFromXml() throws NullPointerException, SecurityException {
+        Integer id = null;
         String name = null;
         Long coordinateX = null;
         double coordinateY = 0;
+        ZonedDateTime creationDate = null;
         double height = 0;
         String passportID = null;
         Color hairColor = null;
@@ -43,19 +47,24 @@ public class FileManager {
                 Node node = nodeList.item(i);
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                     Element element = (Element) node;
+
+                    id = Integer.parseInt(element.getElementsByTagName("id").item(0).getTextContent());
+
                     name = element.getElementsByTagName("name").item(0).getTextContent();
-                    if (name.equals("")) throw new NumberFormatException();
+                    if (name.equals("")) throw new IllegalArgumentException();
 
                     NodeList nodeListCoordinates = element.getElementsByTagName("coordinates");
                     Element elementCoordinates = (Element) nodeListCoordinates.item(0);
                     coordinateX = Long.parseLong(elementCoordinates.getElementsByTagName("coordinateX").item(0).getTextContent());
-                    if (coordinateX >= 51) throw new NumberFormatException();
+                    if (coordinateX >= 51) throw new IllegalArgumentException();
                     coordinateY = Double.parseDouble(elementCoordinates.getElementsByTagName("coordinateY").item(0).getTextContent());
 
+                    creationDate = ZonedDateTime.parse(element.getElementsByTagName("creationDate").item(0).getTextContent());
+
                     height = Double.parseDouble(element.getElementsByTagName("height").item(0).getTextContent());
-                    if (height <= 0) throw new NumberFormatException();
+                    if (height <= 0) throw new IllegalArgumentException();
                     passportID = element.getElementsByTagName("passportID").item(0).getTextContent();
-                    if (passportID.equals("")) throw new NumberFormatException();
+                    if (passportID.equals("")) throw new IllegalArgumentException();
                         hairColor = Color.valueOf(element.getElementsByTagName("hairColor").item(0).getTextContent());
                     if (!element.getElementsByTagName("nationality").item(0).getTextContent().equals(""))
                         nationality = Country.valueOf(element.getElementsByTagName("nationality").item(0).getTextContent());
@@ -68,18 +77,18 @@ public class FileManager {
                     locationZ = Long.parseLong(elementLocation.getElementsByTagName("locationZ").item(0).getTextContent());
                 }
 
-                Person person = new Person(name, new Coordinates(coordinateX, coordinateY),height,
+                Person person = new Person(id, name, new Coordinates(coordinateX, coordinateY), creationDate, height,
                         passportID, hairColor, nationality, new Location(locationX, locationY, locationZ));
 
                 personHashSet.add(person);
             }
-        } catch (IOException | SAXException | ParserConfigurationException e) {
+        } catch (IOException | ParserConfigurationException e) {
             System.out.println(e.getMessage());
         } catch (SecurityException e) {
             System.out.println("Недостаточно прав для открытия файла.");
         } catch (NullPointerException e) {
             System.out.println("В файле нет объектов");
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException | SAXException e){
             System.out.println("Ошибка! Некоторые или все поля файла содержат недопустимые данные.");
             System.exit(0);
         }
@@ -133,7 +142,9 @@ public class FileManager {
                 elementPerson.appendChild(elementHairColor);
 
                 Element elementNationality = doc.createElement("nationality");
-                elementNationality.appendChild(doc.createTextNode(person.getNationality().toString()));
+                if (person.getNationality() != null)
+                    elementNationality.appendChild(doc.createTextNode(person.getNationality().toString()));
+                else elementNationality.appendChild(doc.createTextNode(""));
                 elementPerson.appendChild(elementNationality);
 
                 Element elementLocation = doc.createElement("location");
