@@ -87,9 +87,9 @@ public class FileManager {
         } catch (SecurityException e) {
             System.out.println("Недостаточно прав для открытия файла.");
         } catch (NullPointerException e) {
-            System.out.println("В файле нет объектов");
+            System.out.println("В файле нет объектов или коллекция повреждена.");
         } catch (IllegalArgumentException | SAXException e){
-            System.out.println("Ошибка! Некоторые или все поля файла содержат недопустимые данные.");
+            System.out.println("Ошибка! Некоторые поля файла содержат недопустимые данные.");
             System.exit(0);
         }
     }
