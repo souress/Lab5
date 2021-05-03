@@ -1,0 +1,7 @@
+info
+clear
+info
+add valid 51 2 192 passportId BROWN VATICAN 1123124 214221 324114
+add invalid 52 124125 123 passportId RED RUSSIA 1 2 3
+add name 1 2 12341 passportId RED RUSSIA 1124 212412 3124
+info
