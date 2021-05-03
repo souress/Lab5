@@ -42,39 +42,7 @@ public class CommandReceiver {
         System.out.println("Коллекция очищена");
     }
 
-//    public void execute_script(String[] args) throws FileNotFoundException {
-//        if (args.length != 2)
-//            System.out.println("Некорректное количество аргументов. Для справки напишите help.");
-//        else {
-//            pathSet.add(args[1]);
-//            Scanner scanner = new Scanner(new FileReader(args[1]));
-//            dante:
-//            {
-//                while (scanner.hasNextLine()) {
-//                    String nextLine = scanner.nextLine();
-//                    try {
-//                        for (String path : pathSet) {
-//                            if (nextLine.contains(path))
-//                                throw new StackOverflowError();
-//                        }
-//                    } catch (StackOverflowError error) {
-//                        System.out.println("Обнаружен рекурсивный вызов скрипта! Попытка переполнения стека будет пресечена.");
-//                    } finally {
-//                        for (String path : pathSet) {
-//                            if (nextLine.contains(path))
-//                                if (scanner.hasNextLine())
-//                                    nextLine = scanner.nextLine();
-//                                else break dante;
-//                        }
-//                        String[] command = nextLine.split(" ");
-//                        commandInvoker.executeCommand(command);
-//                    }
-//                }
-//            }
-//        }
-//    }
-
-    public void execute_script(String[] args) throws FileNotFoundException { // TODO перенести защиту от рекурсии
+    public void execute_script(String[] args) throws FileNotFoundException {
         if (args.length != 2) System.out.println("Некорректное количество аргументов. Для справки напишите help.");
         else {
             Scanner scanner = new Scanner(new FileReader(args[1]));
@@ -84,6 +52,9 @@ public class CommandReceiver {
                     Person person;
                     ArrayList<String> personFields = new ArrayList<>(Arrays.asList(line.split(" ")));
                     personFields.remove(0);
+                    for (String parameter : personFields) {
+                        if (parameter.equals("null")) personFields.set(personFields.indexOf(parameter), null);
+                    }
                     switch (line.split(" ")[0]) {
                         case "add":
                             try {
@@ -99,6 +70,7 @@ public class CommandReceiver {
                                 personFields.remove(0);
                                 person = PersonCreator.createScriptPerson(personFields);
                                 CollectionManager.update(person, Integer.parseInt(line.split(" ")[1]));
+                                System.out.println("Элемент обновлен.");
                             } catch (NullPointerException exception) {
                                 System.out.println("Параметры команды update не прошли валидацию. Команда пропущена.");
                                 continue;

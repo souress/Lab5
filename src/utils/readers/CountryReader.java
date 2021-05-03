@@ -29,4 +29,9 @@ public class CountryReader {
 
         return Enum.valueOf(Country.class, toBeContained);
     }
+
+    public static Country readForScript(String parameter) {
+        if (parameter == null) return null;
+        else return Country.valueOf(parameter);
+    }
 }

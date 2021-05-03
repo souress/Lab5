@@ -22,10 +22,10 @@ public class PersonCreator {
                 new Location(locationX, locationY, locationZ));
     }
 
-    public static Person createScriptPerson(ArrayList<String> parameters) {// TODO null for nationality
+    public static Person createScriptPerson(ArrayList<String> parameters) {
         if (validateArray(parameters)) {
             return new Person(parameters.get(0), new Coordinates(Long.parseLong(parameters.get(1)), Double.parseDouble(parameters.get(2))),
-                    Double.parseDouble(parameters.get(3)), parameters.get(4), Color.valueOf(parameters.get(5)), Country.valueOf(parameters.get(6)),
+                    Double.parseDouble(parameters.get(3)), parameters.get(4), Color.valueOf(parameters.get(5)), CountryReader.readForScript(parameters.get(6)),
                     new Location(Long.parseLong(parameters.get(7)), Float.parseFloat(parameters.get(8)), Long.parseLong(parameters.get(9))));
         } else {
             throw new NullPointerException();
@@ -39,7 +39,7 @@ public class PersonCreator {
                     && Long.parseLong(parameters.get(3)) > 0
                     && !parameters.get(4).isEmpty()
                     && ColorReader.checkExist(parameters.get(5))
-                    && CountryReader.checkExist(parameters.get(6))
+                    && (CountryReader.checkExist(parameters.get(6)) || parameters.get(6) == null)
                     && parameters.get(9) != null;
 
         } catch (NumberFormatException ex) { return false; }
