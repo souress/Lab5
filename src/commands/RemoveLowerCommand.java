@@ -2,6 +2,9 @@ package commands;
 
 import commands.utils.CommandReceiver;
 
+/**
+ * Класс команды, удаляющей элементы, меньше заданного.
+ */
 public class RemoveLowerCommand extends AbstractCommand {
     private final CommandReceiver commandReceiver;
 

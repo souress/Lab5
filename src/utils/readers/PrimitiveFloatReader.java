@@ -2,6 +2,9 @@ package utils.readers;
 
 import java.util.Scanner;
 
+/**
+ * Считыватель примитива float.
+ */
 public class PrimitiveFloatReader {
     public static float read(String messageForConsole, float limit, String type) {
         System.out.print(messageForConsole);

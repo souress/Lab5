@@ -2,6 +2,9 @@ package utils.readers;
 
 import java.util.Scanner;
 
+/**
+ * Считыватель класса-оболочки long.
+ */
 public class RefLongReader {
     public static Long read(String messageForConsole, boolean canBeNull, int limit, String type) {
         System.out.print(messageForConsole);

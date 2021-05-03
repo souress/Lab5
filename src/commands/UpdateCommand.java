@@ -2,6 +2,9 @@ package commands;
 
 import commands.utils.CommandReceiver;
 
+/**
+ * Класс команды, обновляющей элемент по id.
+ */
 public class UpdateCommand extends AbstractCommand {
     private final CommandReceiver commandReceiver;
 

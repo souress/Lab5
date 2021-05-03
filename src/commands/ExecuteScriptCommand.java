@@ -4,6 +4,9 @@ import commands.utils.*;
 
 import java.io.FileNotFoundException;
 
+/**
+ * Класс команды, выполняющей скрипт.
+ */
 public class ExecuteScriptCommand extends AbstractCommand {
     private final CommandReceiver commandReceiver;
 

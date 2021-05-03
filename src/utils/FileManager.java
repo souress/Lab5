@@ -12,8 +12,10 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
 
+/**
+ * Класс, отвечающий за сохранение и загрузку данных в xml
+ */
 public class FileManager {
     private static final HashSet<Person> personHashSet = new HashSet<>();
 
@@ -23,6 +25,12 @@ public class FileManager {
         FileManager.filePath = filePath;
     }
 
+    /**
+     * Метод, преобразующий xml в коллекцию
+     * @throws NullPointerException если в файле нет объектов или коллекция повреждена
+     * @throws SecurityException если недостаточно прав для чтения файла
+     * @throws IllegalArgumentException если поля объектов в файле сожержат недопустимые значения
+     */
     public void parseFromXml() throws NullPointerException, SecurityException {
         Integer id = null;
         String name = null;
@@ -98,6 +106,10 @@ public class FileManager {
         return personHashSet;
     }
 
+    /**
+     * Метод, преобразующий коллекцию в xml
+     * @param personCollection коллекция, которая будет записана в файл
+     */
     public static void parseToXml(Collection<Person> personCollection) {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();

@@ -1,10 +1,11 @@
 package utils.readers;
 
 import data.Country;
+import java.util.*;
 
-import java.util.Arrays;
-import java.util.Scanner;
-
+/**
+ * Считыватель страны.
+ */
 public class CountryReader {
     public static boolean checkExist(String toBeContained) {
         return Arrays.stream(Country.values()).anyMatch((country) -> country.name().equals(toBeContained));

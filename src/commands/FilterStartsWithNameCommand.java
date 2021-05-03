@@ -2,6 +2,9 @@ package commands;
 
 import commands.utils.CommandReceiver;
 
+/**
+ * Класс команды, выводящей элементы коллекции, поля name которых начинаются с заданной подстроки.
+ */
 public class FilterStartsWithNameCommand extends AbstractCommand {
     private final CommandReceiver commandReceiver;
 

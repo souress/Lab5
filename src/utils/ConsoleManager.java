@@ -6,6 +6,9 @@ import commands.utils.*;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**
+ * Класс управления и регистрацией команд консолью.
+ */
 public class ConsoleManager {
     public void startInteractiveMode() {
         CommandInvoker commandInvoker = new CommandInvoker();

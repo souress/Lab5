@@ -2,6 +2,9 @@ package commands;
 
 import commands.utils.CommandReceiver;
 
+/**
+ * Класс команды, выводящей в консоль информацию о коллекции.
+ */
 public class InfoCommand extends AbstractCommand {
     private final CommandReceiver commandReceiver;
 

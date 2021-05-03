@@ -2,6 +2,9 @@ package commands;
 
 import commands.utils.CommandReceiver;
 
+/**
+ * Класс команды, очищающей коллекцию.
+ */
 public class ClearCommand extends AbstractCommand {
     private final CommandReceiver commandReceiver;
 

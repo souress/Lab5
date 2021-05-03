@@ -2,6 +2,9 @@ package commands;
 
 import commands.utils.CommandReceiver;
 
+/**
+ * Класс команды, выводящей в консоль имя и passportId элементов по убыванию.
+ */
 public class PrintFieldDescendingPassportIdCommand extends AbstractCommand {
     private final CommandReceiver commandReceiver;
 

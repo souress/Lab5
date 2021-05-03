@@ -2,6 +2,9 @@ package commands;
 
 import commands.utils.CommandReceiver;
 
+/**
+ * Класс команды, выводящей в консоль содержимого коллекции.
+ */
 public class ShowCommand extends AbstractCommand {
     private final CommandReceiver commandReceiver;
 

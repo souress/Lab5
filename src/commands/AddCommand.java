@@ -2,6 +2,9 @@ package commands;
 
 import commands.utils.CommandReceiver;
 
+/**
+ * Класс команды, добавляющей элемент в коллекцию.
+ */
 public class AddCommand extends AbstractCommand {
     private final CommandReceiver commandReceiver;
 

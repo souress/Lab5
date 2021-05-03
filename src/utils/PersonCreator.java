@@ -5,6 +5,9 @@ import utils.readers.*;
 
 import java.util.ArrayList;
 
+/**
+ * Класс, содержащий методы для создание объекта Person
+ */
 public class PersonCreator {
     public static Person createPerson() {
         String name = StringReader.read("Введите name: ", false);
@@ -22,6 +25,11 @@ public class PersonCreator {
                 new Location(locationX, locationY, locationZ));
     }
 
+    /**
+     * Метод создающий объект Person на основе полей прочитанных из скрипта
+     * @param parameters Список содержащий поля для будущего объекта Person
+     * @return Объект класса Person
+     */
     public static Person createScriptPerson(ArrayList<String> parameters) {
         if (validateArray(parameters)) {
             return new Person(parameters.get(0), new Coordinates(Long.parseLong(parameters.get(1)), Double.parseDouble(parameters.get(2))),
@@ -32,6 +40,11 @@ public class PersonCreator {
         }
     }
 
+    /**
+     * Метод для проверки полей, содержащихся в списке, на валидность
+     * @param parameters Список содержащий поля для будущего объекта Person
+     * @return true, если поля валидны или false, если нет
+     */
     private static boolean validateArray(ArrayList<String> parameters) {
         try {
             return !parameters.get(0).isEmpty()

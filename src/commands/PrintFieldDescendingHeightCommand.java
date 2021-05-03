@@ -2,6 +2,9 @@ package commands;
 
 import commands.utils.CommandReceiver;
 
+/**
+ * Класс команды, выводящей в консоль имя и рост элементов по убыванию.
+ */
 public class PrintFieldDescendingHeightCommand extends AbstractCommand {
     private final CommandReceiver commandReceiver;
 

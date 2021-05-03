@@ -2,6 +2,9 @@ package commands;
 
 import java.io.FileNotFoundException;
 
+/**
+ * Абстрактный класс команд. На его основе создается остальные команды.
+ */
 public abstract class AbstractCommand {
     private final String name;
     private final String description;

@@ -5,6 +5,9 @@ import commands.AbstractCommand;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 
+/**
+ * Инвокер(вызыватель), выполняет команды. Хранит зарегистрированные команды.
+ */
 public class CommandInvoker {
     private final HashMap<String, AbstractCommand> commandMap = new HashMap<>();
 

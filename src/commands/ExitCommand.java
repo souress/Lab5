@@ -2,6 +2,9 @@ package commands;
 
 import commands.utils.CommandReceiver;
 
+/**
+ * Класс команды, оканчивающей работу приложения.
+ */
 public class ExitCommand extends AbstractCommand {
     private final CommandReceiver commandReceiver;
 

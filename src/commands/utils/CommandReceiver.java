@@ -9,6 +9,9 @@ import javax.xml.transform.TransformerException;
 import java.io.*;
 import java.util.*;
 
+/**
+ * Ресивер(получатель), описывает основную логику команд, при надобности делегирует ее менеджеру коллекции.
+ */
 public class CommandReceiver {
     private final CommandInvoker commandInvoker;
     private final LinkedHashSet<String> pathSet;

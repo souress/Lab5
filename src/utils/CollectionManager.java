@@ -5,6 +5,9 @@ import data.Person;
 import java.time.ZonedDateTime;
 import java.util.*;
 
+/**
+ * Менеджер коллекцией. Описывает логику команд, выполняющих работу с коллекцией
+ */
 public class CollectionManager {
     private static HashSet<Person> personHashSet;
     private static ZonedDateTime creationDate;

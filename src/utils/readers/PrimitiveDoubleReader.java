@@ -2,6 +2,9 @@ package utils.readers;
 
 import java.util.Scanner;
 
+/**
+ * Считыватель примитива double.
+ */
 public class PrimitiveDoubleReader {
     public static double read(String messageForConsole, double limit, String type) {
         System.out.print(messageForConsole);

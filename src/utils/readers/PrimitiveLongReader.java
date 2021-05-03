@@ -2,6 +2,9 @@ package utils.readers;
 
 import java.util.Scanner;
 
+/**
+ * Считыватель примитива long.
+ */
 public class PrimitiveLongReader {
     public static long read(String messageForConsole, int limit, String type) {
         System.out.print(messageForConsole);

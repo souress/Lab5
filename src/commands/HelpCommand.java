@@ -2,6 +2,9 @@ package commands;
 
 import commands.utils.CommandReceiver;
 
+/**
+ * Класс команды, выводящей в консоль информацию о вссех доступных командах.
+ */
 public class HelpCommand extends AbstractCommand {
     private final CommandReceiver commandReceiver;
 

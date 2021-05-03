@@ -5,6 +5,9 @@ import data.Color;
 import java.util.Arrays;
 import java.util.Scanner;
 
+/**
+ * Считыватель цвета.
+ */
 public class ColorReader {
     public static boolean checkExist(String toBeContained) {
         return Arrays.stream(Color.values()).anyMatch((color) -> color.name().equals(toBeContained));

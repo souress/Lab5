@@ -2,6 +2,9 @@ package commands;
 
 import commands.utils.CommandReceiver;
 
+/**
+ * Класс команды, добавляющей в коллекцию элемент, если он является наибольшим.
+ */
 public class AddIfMaxCommand extends AbstractCommand {
     private final CommandReceiver commandReceiver;
 
