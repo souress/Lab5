@@ -12,7 +12,7 @@ public class RemoveByIdCommand extends AbstractCommand {
 
     @Override
     public void execute(String[] args) {
-        if (args.length == 2) commandReceiver.remove_by_id(args[1]);
+        if (args.length == 2) commandReceiver.removeByID(args[1]);
         else System.out.println("Некорректное количество аргументов. Для справки напишите help.");
     }
 

@@ -45,11 +45,14 @@ public class CollectionManager {
         else System.out.println("Коллекция пуста");
     }
 
-    public static void remove_by_id(Integer personId) {
-        personHashSet.forEach(person -> {
-            if (person.getId().equals(personId))
-                personHashSet.remove(person);
-        });
+    public static void removeByID(Integer personId) {
+        while (personHashSet.iterator().hasNext()){
+            Iterator<Person> personIterator = personHashSet.iterator();
+            if (personIterator.next().getId().equals(personId)) {
+                personIterator.remove();
+                break;
+            }
+        }
     }
 
     public static boolean checkExist(Integer id) {

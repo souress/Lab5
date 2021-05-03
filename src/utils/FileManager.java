@@ -56,7 +56,7 @@ public class FileManager {
                     NodeList nodeListCoordinates = element.getElementsByTagName("coordinates");
                     Element elementCoordinates = (Element) nodeListCoordinates.item(0);
                     coordinateX = Long.parseLong(elementCoordinates.getElementsByTagName("coordinateX").item(0).getTextContent());
-                    if (coordinateX >= 51) throw new IllegalArgumentException();
+                    if (coordinateX > 51) throw new IllegalArgumentException();
                     coordinateY = Double.parseDouble(elementCoordinates.getElementsByTagName("coordinateY").item(0).getTextContent());
 
                     creationDate = ZonedDateTime.parse(element.getElementsByTagName("creationDate").item(0).getTextContent());
