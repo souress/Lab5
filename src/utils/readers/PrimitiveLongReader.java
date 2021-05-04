@@ -26,7 +26,7 @@ public class PrimitiveLongReader {
                         break;
                 }
             } catch (NumberFormatException ex) {
-                System.out.print("Вы должны ввести число, попробуйте снова: ");
+                System.out.print("Вы должны ввести число типа long, попробуйте снова: ");
             }
         }
         return result;
@@ -42,7 +42,7 @@ public class PrimitiveLongReader {
                 result = Long.parseLong(sc.nextLine().trim());
                 end = true;
             } catch (NumberFormatException ex) {
-                System.out.print("Вы должны ввести число, попробуйте снова: ");
+                System.out.print("Вы должны ввести число типа long, попробуйте снова: ");
             }
         }
         return result;

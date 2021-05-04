@@ -26,7 +26,7 @@ public class PrimitiveFloatReader {
                         break;
                 }
             } catch (NumberFormatException ex) {
-                System.out.print("Вы должны ввести число, попробуйте снова: ");
+                System.out.print("Вы должны ввести число типа float, попробуйте снова: ");
             }
         }
         return result;
@@ -42,7 +42,7 @@ public class PrimitiveFloatReader {
                 result = Float.parseFloat(sc.nextLine().trim());
                 end = true;
             } catch (NumberFormatException ex) {
-                System.out.print("Вы должны ввести число, попробуйте снова: ");
+                System.out.print("Вы должны ввести число типа float, попробуйте снова: ");
             }
         }
         return result;

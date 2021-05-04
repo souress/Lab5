@@ -25,7 +25,7 @@ public class PrimitiveDoubleReader {
                         break;
                 }
             } catch (NumberFormatException ex) {
-                System.out.print("Вы должны ввести число, попробуйте снова: ");
+                System.out.print("Вы должны ввести число типа double, попробуйте снова: ");
             }
         }
         return result;
@@ -41,7 +41,7 @@ public class PrimitiveDoubleReader {
                 result = Double.parseDouble(sc.nextLine().trim());
                 end = true;
             } catch (NumberFormatException ex) {
-                System.out.print("Вы должны ввести число, попробуйте снова: ");
+                System.out.print("Вы должны ввести число типа double, попробуйте снова: ");
             }
         }
         return result;

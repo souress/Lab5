@@ -29,7 +29,7 @@ public class RefLongReader {
                 if (canBeNull && sc.nextLine().trim().equals("")) {
                     return null;
                 }
-                System.out.print("Вы должны ввести число, попробуйте снова: ");
+                System.out.print("Вы должны ввести число типа Long, попробуйте снова: ");
             }
         }
         return result;
@@ -46,7 +46,7 @@ public class RefLongReader {
                 end = true;
             } catch (NumberFormatException ex) {
                 if (canBeNull && sc.nextLine().trim().equals("")) return null;
-                System.out.print("Вы должны ввести число, попробуйте снова: ");
+                System.out.print("Вы должны ввести число типа Long, попробуйте снова: ");
             }
         }
         return result;
