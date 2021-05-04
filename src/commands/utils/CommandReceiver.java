@@ -127,23 +127,22 @@ public class CommandReceiver {
                             }
                             break;
                     }
-                } else if (command.matches("execute_script")) {
+                } else if (command.contains("execute_script")) {
                     pathSet.add(args[1]);
                     dante:
                     {
-                        String line = scanner.nextLine();
                         try {
                             for (String path : pathSet) {
-                                if (line.matches(path))
+                                if (command.contains(path))
                                     throw new StackOverflowError();
                             }
                         } catch (StackOverflowError error) {
-                            System.out.println("Обнаружен рекурсивный вызов скрипта! Попытка переполнения стека будет пресечена.");
+                            System.out.println("Обнаружен рекурсивный вызов скрипта! Попытка переполнения стека пресечена.");
                         } finally {
                             for (String path : pathSet) {
-                                if (line.contains(path))
+                                if (command.contains(path))
                                     if (scanner.hasNextLine())
-                                        line = scanner.nextLine();
+                                        command = scanner.nextLine();
                                     else break dante;
                             }
                             commandInvoker.executeCommand(command.split(" "));

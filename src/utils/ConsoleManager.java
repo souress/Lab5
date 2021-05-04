@@ -3,6 +3,8 @@ package utils;
 import commands.*;
 import commands.utils.*;
 
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -34,7 +36,7 @@ public class ConsoleManager {
 
         System.out.println("Количество команд: " + commandInvoker.getCommandMap().size());
 
-        try(Scanner scanner = new Scanner(System.in)) {
+        try(Scanner scanner = new Scanner(new InputStreamReader(System.in, Charset.defaultCharset()))) {
             while (scanner.hasNextLine()) {
                 String command = scanner.nextLine();
                 if (commandInvoker.getCommandMap().containsKey(command.trim().split(" ")[0]))
