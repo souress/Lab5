@@ -138,4 +138,3 @@ public class Person implements Comparable<Person> {
                 "\n\tlocation: " + location.toString();
     }
 }
-
