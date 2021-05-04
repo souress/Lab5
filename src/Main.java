@@ -7,7 +7,7 @@ import utils.*;
 public class Main {
     public static void main(String[] args) {
         try {
-            if (args[0] == null) throw new IllegalArgumentException();
+            if (args[1] == null) throw new IllegalArgumentException();
             FileManager fileManager = new FileManager(args[0]);
             fileManager.parseFromXml();
             ConsoleManager consoleManager = new ConsoleManager();
