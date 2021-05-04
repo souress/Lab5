@@ -6,9 +6,14 @@ import utils.*;
  */
 public class Main {
     public static void main(String[] args) {
-        FileManager fileManager = new FileManager(args[0]);
-        fileManager.parseFromXml();
-        ConsoleManager consoleManager = new ConsoleManager();
-        consoleManager.startInteractiveMode();
+        try {
+            if (args[0] == null) throw new IllegalArgumentException();
+            FileManager fileManager = new FileManager(args[0]);
+            fileManager.parseFromXml();
+            ConsoleManager consoleManager = new ConsoleManager();
+            consoleManager.startInteractiveMode();
+        } catch (IllegalArgumentException exception) {
+            System.out.println("Укажите путь к файлу через аргумент командной строки.");
+        }
     }
 }
