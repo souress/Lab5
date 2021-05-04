@@ -34,9 +34,13 @@ public class ConsoleManager {
 
         System.out.println("Количество команд: " + commandInvoker.getCommandMap().size());
 
-        try(Scanner scanner = new Scanner(System.in)){
+        try(Scanner scanner = new Scanner(System.in)) {
             while (scanner.hasNextLine()) {
-                commandInvoker.executeCommand(scanner.nextLine().trim().split(" "));
+                String command = scanner.nextLine();
+                if (commandInvoker.getCommandMap().containsKey(command.trim().split(" ")[0]))
+                    commandInvoker.executeCommand(command.trim().split(" "));
+                else if (!command.equals(""))
+                    System.out.println(command + " не является командой");
             }
         } catch (NoSuchElementException exception) {
             System.out.println("Экстренная остановка программы!");
