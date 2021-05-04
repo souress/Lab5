@@ -46,6 +46,8 @@ public class FileManager {
         Long locationZ = null;
         try {
             File in = new File(filePath);
+            if (!in.exists()) throw new FileNotFoundException();
+            if (!in.canRead() || !in.canWrite()) throw new SecurityException();
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
             Document document = documentBuilder.parse(in);
@@ -90,10 +92,14 @@ public class FileManager {
 
                 personHashSet.add(person);
             }
+        } catch (FileNotFoundException e) {
+            System.out.println("Файл не найден! Выход...");
+            System.exit(0);
         } catch (IOException | ParserConfigurationException e) {
             System.out.println(e.getMessage());
         } catch (SecurityException e) {
-            System.out.println("Недостаточно прав для открытия файла.");
+            System.out.println("Недостаточно прав! Проверьте наличие прав на чтение и запись.");
+            System.exit(0);
         } catch (NullPointerException e) {
             System.out.println("В файле нет объектов или коллекция повреждена.");
         } catch (IllegalArgumentException | SAXException e){

@@ -16,7 +16,19 @@ public class StringReader {
             readString = in.nextLine().trim();
         }
 
-        if(canBeNull && readString.equals("")) { readString = null; }
+        if(canBeNull && readString.equals(""))
+            readString = null;
+        return readString;
+    }
+
+    public static String readFromScript(Scanner scanner, boolean canBeNull) {
+        String readString = scanner.nextLine().trim();
+
+        if(!canBeNull && readString.equals(""))
+            throw new IllegalArgumentException();
+
+        if(canBeNull && readString.equals(""))
+            readString = null;
         return readString;
     }
 }

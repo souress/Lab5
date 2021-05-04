@@ -47,4 +47,30 @@ public class PrimitiveLongReader {
         }
         return result;
     }
+
+    public static long readFromScript(Scanner scanner, double limit, String type) {
+        long result;
+        result = Long.parseLong(scanner.nextLine().trim());
+        switch (type) {
+            case ("MIN"):
+                if (result > limit)
+                    return result;
+                else throw new IllegalArgumentException();
+            case ("MAX"):
+                if (result < limit)
+                    return result;
+                else throw new IllegalArgumentException();
+        }
+        return result;
+    }
+
+    public static long readFromScript(Scanner scanner) {
+        long result;
+        try {
+            result = Long.parseLong(scanner.nextLine().trim());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException();
+        }
+        return result;
+    }
 }

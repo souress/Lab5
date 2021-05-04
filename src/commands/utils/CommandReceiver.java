@@ -1,8 +1,10 @@
 package commands.utils;
 
 import commands.*;
-import data.Person;
+import data.*;
 import utils.*;
+import utils.readers.*;
+import utils.readers.StringReader;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -46,76 +48,93 @@ public class CommandReceiver {
     }
 
     public void execute_script(String[] args) throws FileNotFoundException {
+        class ScriptPersonCreator {
+            public Person createScriptPerson(Scanner scanner) {
+                String name = StringReader.readFromScript(scanner, false);
+                Long coordinateX = RefLongReader.readFromScript(scanner, 51, "MAX");
+                double coordinateY = PrimitiveDoubleReader.readFromScript(scanner);
+                double height = PrimitiveDoubleReader.readFromScript(scanner, 0, "MIN");
+                String passportID = StringReader.readFromScript(scanner, true);
+                Color hairColor = ColorReader.readFromScript(scanner, false);
+                Country nationality = CountryReader.readFromScript(scanner, true);
+                long locationX = PrimitiveLongReader.readFromScript(scanner);
+                float locationY = PrimitiveFloatReader.readFromScript(scanner);
+                Long locationZ = RefLongReader.readFromScript(scanner);
+
+                return new Person(name, new Coordinates(coordinateX, coordinateY), height, passportID, hairColor, nationality,
+                        new Location(locationX, locationY, locationZ));
+            }
+        }
+
         if (args.length != 2) System.out.println("Некорректное количество аргументов. Для справки напишите help.");
         else {
             Scanner scanner = new Scanner(new FileReader(args[1]));
             while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                if (line.split(" ")[0].matches("add|update|add_if_max|remove_greater|remove_lower")) {
+                String command = scanner.nextLine();
+                if (command.matches("add|update|add_if_max|remove_greater|remove_lower")) {
                     Person person;
-                    ArrayList<String> personFields = new ArrayList<>(Arrays.asList(line.split(" ")));
-                    personFields.remove(0);
-                    for (String parameter : personFields) {
-                        if (parameter.equals("null")) personFields.set(personFields.indexOf(parameter), null);
-                    }
-                    switch (line.split(" ")[0]) {
+                    ScriptPersonCreator scriptPersonCreator = new ScriptPersonCreator();
+                    switch (command) {
                         case "add":
                             try {
-                                person = PersonCreator.createScriptPerson(personFields);
+                                person = scriptPersonCreator.createScriptPerson(scanner);
                                 CollectionManager.add(person);
-                            } catch (NullPointerException exception) {
+                            } catch (NullPointerException | IllegalArgumentException exception) {
                                 System.out.println("Параметры команды add не прошли валидацию. Команда пропущена.");
                                 continue;
                             }
                             break;
                         case "update":
                             try {
-                                personFields.remove(0);
-                                person = PersonCreator.createScriptPerson(personFields);
-                                CollectionManager.update(person, Integer.parseInt(line.split(" ")[1]));
+                                String id = scanner.nextLine();
+                                if (!CollectionManager.checkExist(Integer.parseInt(id)))
+                                    throw new IllegalStateException();
+                                person = scriptPersonCreator.createScriptPerson(scanner);
+                                CollectionManager.update(person, Integer.parseInt(id));
                                 System.out.println("Элемент обновлен.");
-                            } catch (NullPointerException exception) {
+                            } catch (NullPointerException | IllegalArgumentException exception) {
                                 System.out.println("Параметры команды update не прошли валидацию. Команда пропущена.");
                                 continue;
-                            } catch (IllegalArgumentException exception) {
+                            } catch (IllegalStateException exception) {
                                 System.out.println("id в команде update не найден!");
                             }
                             break;
                         case "add_if_max":
                             try {
-                                person = PersonCreator.createScriptPerson(personFields);
+                                person = scriptPersonCreator.createScriptPerson(scanner);
                                 CollectionManager.addIfMax(person);
-                            } catch (NullPointerException exception) {
+                            } catch (NullPointerException | IllegalArgumentException exception) {
                                 System.out.println("Параметры команды add_if_max не прошли валидацию. Команда пропущена.");
                                 continue;
                             }
                             break;
                         case "remove_greater":
                             try {
-                                person = PersonCreator.createScriptPerson(personFields);
+                                person = scriptPersonCreator.createScriptPerson(scanner);
                                 CollectionManager.removeGreater(person);
-                            } catch (NullPointerException exception) {
+                            } catch (NullPointerException | IllegalArgumentException exception) {
                                 System.out.println("Параметры команды remove_greater не прошли валидацию. Команда пропущена.");
                                 continue;
                             }
                             break;
                         case "remove_lower":
                             try {
-                                person = PersonCreator.createScriptPerson(personFields);
+                                person = scriptPersonCreator.createScriptPerson(scanner);
                                 CollectionManager.removeLower(person);
-                            } catch (NullPointerException exception) {
+                            } catch (NullPointerException | IllegalArgumentException exception) {
                                 System.out.println("Параметры команды remove_lower не прошли валидацию. Команда пропущена.");
                                 continue;
                             }
                             break;
                     }
-                } else if(line.split(" ")[0].equals("execute_script")) {
+                } else if (command.matches("execute_script")) {
                     pathSet.add(args[1]);
                     dante:
                     {
+                        String line = scanner.nextLine();
                         try {
                             for (String path : pathSet) {
-                                if (line.split(" ")[1].equals(path))
+                                if (line.matches(path))
                                     throw new StackOverflowError();
                             }
                         } catch (StackOverflowError error) {
@@ -127,14 +146,105 @@ public class CommandReceiver {
                                         line = scanner.nextLine();
                                     else break dante;
                             }
-                            String[] command = line.split(" ");
-                            commandInvoker.executeCommand(command);
+                            commandInvoker.executeCommand(command.split(" "));
                         }
                     }
-                } else commandInvoker.executeCommand(line.split(" "));
+                } else if (commandInvoker.getCommandMap().containsKey(command))
+                    commandInvoker.executeCommand(command.split(" "));
             }
         }
     }
+
+//    public void execute_script_from_interactive_mode(String[] args) throws FileNotFoundException {
+//        if (args.length != 2) System.out.println("Некорректное количество аргументов. Для справки напишите help.");
+//        else {
+//            Scanner scanner = new Scanner(new FileReader(args[1]));
+//            while (scanner.hasNextLine()) {
+//                String line = scanner.nextLine();
+//                if (line.split(" ")[0].matches("add|update|add_if_max|remove_greater|remove_lower")) {
+//                    Person person;
+//                    ArrayList<String> personFields = new ArrayList<>(Arrays.asList(line.split(" ")));
+//                    personFields.remove(0);
+//                    for (String parameter : personFields) {
+//                        if (parameter.equals("null")) personFields.set(personFields.indexOf(parameter), null);
+//                    }
+//                    switch (line.split(" ")[0]) {
+//                        case "add":
+//                            try {
+//                                person = PersonCreator.createScriptPerson(personFields);
+//                                CollectionManager.add(person);
+//                            } catch (NullPointerException exception) {
+//                                System.out.println("Параметры команды add не прошли валидацию. Команда пропущена.");
+//                                continue;
+//                            }
+//                            break;
+//                        case "update":
+//                            try {
+//                                personFields.remove(0);
+//                                person = PersonCreator.createScriptPerson(personFields);
+//                                CollectionManager.update(person, Integer.parseInt(line.split(" ")[1]));
+//                                System.out.println("Элемент обновлен.");
+//                            } catch (NullPointerException exception) {
+//                                System.out.println("Параметры команды update не прошли валидацию. Команда пропущена.");
+//                                continue;
+//                            } catch (IllegalArgumentException exception) {
+//                                System.out.println("id в команде update не найден!");
+//                            }
+//                            break;
+//                        case "add_if_max":
+//                            try {
+//                                person = PersonCreator.createScriptPerson(personFields);
+//                                CollectionManager.addIfMax(person);
+//                            } catch (NullPointerException exception) {
+//                                System.out.println("Параметры команды add_if_max не прошли валидацию. Команда пропущена.");
+//                                continue;
+//                            }
+//                            break;
+//                        case "remove_greater":
+//                            try {
+//                                person = PersonCreator.createScriptPerson(personFields);
+//                                CollectionManager.removeGreater(person);
+//                            } catch (NullPointerException exception) {
+//                                System.out.println("Параметры команды remove_greater не прошли валидацию. Команда пропущена.");
+//                                continue;
+//                            }
+//                            break;
+//                        case "remove_lower":
+//                            try {
+//                                person = PersonCreator.createScriptPerson(personFields);
+//                                CollectionManager.removeLower(person);
+//                            } catch (NullPointerException exception) {
+//                                System.out.println("Параметры команды remove_lower не прошли валидацию. Команда пропущена.");
+//                                continue;
+//                            }
+//                            break;
+//                    }
+//                } else if(line.split(" ")[0].equals("execute_script")) {
+//                    pathSet.add(args[1]);
+//                    dante:
+//                    {
+//                        try {
+//                            for (String path : pathSet) {
+//                                if (line.split(" ")[1].equals(path))
+//                                    throw new StackOverflowError();
+//                            }
+//                        } catch (StackOverflowError error) {
+//                            System.out.println("Обнаружен рекурсивный вызов скрипта! Попытка переполнения стека будет пресечена.");
+//                        } finally {
+//                            for (String path : pathSet) {
+//                                if (line.contains(path))
+//                                    if (scanner.hasNextLine())
+//                                        line = scanner.nextLine();
+//                                    else break dante;
+//                            }
+//                            String[] command = line.split(" ");
+//                            commandInvoker.executeCommand(command);
+//                        }
+//                    }
+//                } else commandInvoker.executeCommand(line.split(" "));
+//            }
+//        }
+//    }
 
     public void removeByID(String id) {
         Integer personId;

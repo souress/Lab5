@@ -31,8 +31,14 @@ public class CountryReader {
         return Enum.valueOf(Country.class, toBeContained);
     }
 
-    public static Country readForScript(String parameter) {
-        if (parameter == null) return null;
-        else return Country.valueOf(parameter);
+    public static Country readFromScript(Scanner scanner, boolean canBeNull) {
+        String toBeContained = scanner.nextLine().trim();
+
+        if ((!checkExist(toBeContained)) && !canBeNull && !toBeContained.equals("") ||
+                !canBeNull && toBeContained.equals("") || canBeNull && toBeContained.equals("")) {
+            throw new IllegalArgumentException();
+        } else if (canBeNull && toBeContained.equals("") || canBeNull && toBeContained.equals("null"))
+            return null;
+        else return Enum.valueOf(Country.class, toBeContained);
     }
 }

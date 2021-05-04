@@ -30,4 +30,18 @@ public class ColorReader {
 
         return Enum.valueOf(Color.class, toBeContained);
     }
+
+    public static Color readFromScript(Scanner scanner, boolean canBeNull) {
+        String toBeContained = scanner.nextLine().trim();
+
+        if ((!checkExist(toBeContained)) && !canBeNull && !toBeContained.equals("")
+                || !canBeNull && toBeContained.equals("") || canBeNull && !toBeContained.equals("")) {
+            throw new IllegalArgumentException();
+        }
+
+        if (canBeNull && toBeContained.equals(""))
+            return null;
+
+        return Enum.valueOf(Color.class, toBeContained);
+    }
 }

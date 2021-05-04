@@ -51,4 +51,27 @@ public class RefLongReader {
         }
         return result;
     }
+
+    public static Long readFromScript(Scanner scanner) {
+        String readString = scanner.nextLine().trim();
+
+        if(readString.equals(""))
+            throw new IllegalArgumentException();
+        else return Long.parseLong(readString);
+    }
+
+    public static Long readFromScript(Scanner scanner, int limit, String type) {
+        Long result;
+        result = Long.parseLong(scanner.nextLine().trim());
+        switch (type) {
+            case ("NO LIMIT"): break;
+            case ("MIN"):
+                if (result > limit) return result;
+                else throw new IllegalArgumentException();
+            case ("MAX"):
+                if (result <= limit) return result;
+                else throw new IllegalArgumentException();
+        }
+        return result;
+    }
 }

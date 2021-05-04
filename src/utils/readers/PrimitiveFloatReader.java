@@ -47,4 +47,30 @@ public class PrimitiveFloatReader {
         }
         return result;
     }
+
+    public static float readFromScript(Scanner scanner, double limit, String type) {
+        float result;
+        result = Float.parseFloat(scanner.nextLine().trim());
+        switch (type) {
+            case ("MIN"):
+                if (result > limit)
+                    return result;
+                else throw new IllegalArgumentException();
+            case ("MAX"):
+                if (result < limit)
+                    return result;
+                else throw new IllegalArgumentException();
+        }
+        return result;
+    }
+
+    public static float readFromScript(Scanner scanner) {
+        float result;
+        try {
+            result = Float.parseFloat(scanner.nextLine().trim());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException();
+        }
+        return result;
+    }
 }
