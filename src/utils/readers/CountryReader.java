@@ -15,20 +15,22 @@ public class CountryReader {
 
     public static Country read(String messageForConsole, boolean canBeNull) {
         Scanner in = MainLab5.scanner;
-        System.out.print(messageForConsole + " Выберите страну из представленных(" + Arrays.asList(Country.values()) + "): ");
+        System.out.print(messageForConsole + " Выберите страну из представленных("
+                + Arrays.asList(Country.values()) + ") или оставьте пустым: ");
         String toBeContained = in.nextLine().trim();
+
+        if (canBeNull && toBeContained.equals("") || canBeNull && toBeContained.equals("null")) return null;
 
         if ((!checkExist(toBeContained)) && !canBeNull && !toBeContained.equals("") ||
                 !canBeNull && toBeContained.equals("") || canBeNull && !toBeContained.equals("")) {
             while (!checkExist(toBeContained)) {
                 System.out.print("Вы ввели несуществующее значение из представленных. Попробуйте снова: ");
                 toBeContained = in.nextLine().trim();
-                if (canBeNull && toBeContained.equals("")) return null;
+                if (canBeNull && toBeContained.equals("") || canBeNull && toBeContained.equals("null")) return null;
                 checkExist(toBeContained);
             }
         }
 
-        if (canBeNull && toBeContained.equals("")) return null;
 
         return Enum.valueOf(Country.class, toBeContained);
     }
@@ -37,7 +39,7 @@ public class CountryReader {
         String toBeContained = scanner.nextLine().trim();
 
         if ((!checkExist(toBeContained)) && !canBeNull && !toBeContained.equals("") ||
-                !canBeNull && toBeContained.equals("") || canBeNull && toBeContained.equals("")) {
+                !canBeNull && toBeContained.equals("")) {
             throw new IllegalArgumentException();
         } else if (canBeNull && toBeContained.equals("") || canBeNull && toBeContained.equals("null"))
             return null;

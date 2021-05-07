@@ -9,7 +9,7 @@ public class FilterStartsWithNameCommand extends AbstractCommand {
     private final CommandReceiver commandReceiver;
 
     public FilterStartsWithNameCommand(CommandReceiver commandReceiver) {
-        super("filter_starts_with_name name", "вывести элементы, значение поля name которых начинается" +
+        super("filter_starts_with_name <name>", "вывести элементы, значение поля name которых начинается" +
                                                                                                " с заданной подстроки");
         this.commandReceiver = commandReceiver;
     }

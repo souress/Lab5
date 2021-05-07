@@ -9,7 +9,7 @@ public class RemoveByIdCommand extends AbstractCommand {
     private final CommandReceiver commandReceiver;
 
     public RemoveByIdCommand(CommandReceiver commandReceiver) {
-        super("remove_by_id id", "удалить элемент из коллекции по его id");
+        super("remove_by_id <id>", "удалить элемент из коллекции по его id");
         this.commandReceiver = commandReceiver;
     }
 

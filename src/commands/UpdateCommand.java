@@ -9,7 +9,7 @@ public class UpdateCommand extends AbstractCommand {
     private final CommandReceiver commandReceiver;
 
     public UpdateCommand(CommandReceiver commandReceiver) {
-        super("update <id> {element}", "обновить значение элемента коллекции по id");
+        super("update {id} {element}", "обновить значение элемента коллекции по id");
         this.commandReceiver = commandReceiver;
     }
 
