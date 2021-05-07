@@ -1,5 +1,7 @@
 package utils.readers;
 
+import main.MainLab5;
+
 import java.util.Scanner;
 
 /**
@@ -8,7 +10,7 @@ import java.util.Scanner;
 public class RefLongReader {
     public static Long read(String messageForConsole, boolean canBeNull, int limit, String type) {
         System.out.print(messageForConsole);
-        Scanner sc = new Scanner(System.in);
+        Scanner sc = MainLab5.scanner;
         Long result = 0L;
         boolean end = false;
         while (!end) {
@@ -37,7 +39,7 @@ public class RefLongReader {
 
     public static Long read(String messageForConsole, boolean canBeNull) {
         System.out.print(messageForConsole);
-        Scanner sc = new Scanner(System.in);
+        Scanner sc = MainLab5.scanner;
         Long result = 0L;
         boolean end = false;
         while (!end) {

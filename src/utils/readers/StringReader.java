@@ -1,5 +1,7 @@
 package utils.readers;
 
+import main.MainLab5;
+
 import java.util.Scanner;
 
 /**
@@ -7,9 +9,10 @@ import java.util.Scanner;
  */
 public class StringReader {
     public static String read(String messageForConsole, boolean canBeNull) {
-        Scanner in = new Scanner(System.in);
+        Scanner in = MainLab5.scanner;
         System.out.print(messageForConsole);
-        String readString = in.nextLine().trim();
+
+        String readString = in.nextLine();
 
         while(!canBeNull && readString.equals("")) {
             System.out.print("Данное поле не может быть пустым. " + messageForConsole);

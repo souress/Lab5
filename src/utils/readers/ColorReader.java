@@ -1,6 +1,7 @@
 package utils.readers;
 
 import data.Color;
+import main.MainLab5;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -14,7 +15,7 @@ public class ColorReader {
     }
 
     public static Color read(String messageForConsole, boolean canBeNull) {
-        Scanner in = new Scanner(System.in);
+        Scanner in = MainLab5.scanner;
         System.out.print(messageForConsole + " Выберите цвет волос из представленных(" + Arrays.asList(Color.values()) + "): ");
         String toBeContained = in.nextLine().trim();
 

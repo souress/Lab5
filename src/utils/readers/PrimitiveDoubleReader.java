@@ -1,5 +1,7 @@
 package utils.readers;
 
+import main.MainLab5;
+
 import java.util.Scanner;
 
 /**
@@ -8,7 +10,7 @@ import java.util.Scanner;
 public class PrimitiveDoubleReader {
     public static double read(String messageForConsole, double limit, String type) {
         System.out.print(messageForConsole);
-        Scanner sc = new Scanner(System.in);
+        Scanner sc = MainLab5.scanner;
         double result = 0;
         boolean end = false;
         while (!end) {
@@ -33,7 +35,7 @@ public class PrimitiveDoubleReader {
 
     public static double read(String messageForConsole) {
         System.out.print(messageForConsole);
-        Scanner sc = new Scanner(System.in);
+        Scanner sc = MainLab5.scanner;
         double result = 0;
         boolean end = false;
         while (!end) {

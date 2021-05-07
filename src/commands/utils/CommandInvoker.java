@@ -4,6 +4,7 @@ import commands.AbstractCommand;
 
 import java.io.FileNotFoundException;
 import java.util.HashMap;
+import java.util.Scanner;
 
 /**
  * Инвокер(вызыватель), выполняет команды. Хранит зарегистрированные команды.

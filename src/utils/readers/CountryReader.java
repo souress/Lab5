@@ -1,6 +1,8 @@
 package utils.readers;
 
 import data.Country;
+import main.MainLab5;
+
 import java.util.*;
 
 /**
@@ -12,7 +14,7 @@ public class CountryReader {
     }
 
     public static Country read(String messageForConsole, boolean canBeNull) {
-        Scanner in = new Scanner(System.in);
+        Scanner in = MainLab5.scanner;
         System.out.print(messageForConsole + " Выберите страну из представленных(" + Arrays.asList(Country.values()) + "): ");
         String toBeContained = in.nextLine().trim();
 

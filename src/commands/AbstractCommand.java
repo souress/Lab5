@@ -1,6 +1,7 @@
 package commands;
 
 import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 /**
  * Абстрактный класс команд. На его основе создается остальные команды.

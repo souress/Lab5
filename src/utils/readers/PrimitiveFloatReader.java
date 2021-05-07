@@ -1,5 +1,7 @@
 package utils.readers;
 
+import main.MainLab5;
+
 import java.util.Scanner;
 
 /**
@@ -8,7 +10,7 @@ import java.util.Scanner;
 public class PrimitiveFloatReader {
     public static float read(String messageForConsole, float limit, String type) {
         System.out.print(messageForConsole);
-        Scanner sc = new Scanner(System.in);
+        Scanner sc = MainLab5.scanner;
         float result = 0;
         boolean end = false;
         while (!end) {
@@ -34,7 +36,7 @@ public class PrimitiveFloatReader {
 
     public static float read(String messageForConsole) {
         System.out.print(messageForConsole);
-        Scanner sc = new Scanner(System.in);
+        Scanner sc = MainLab5.scanner;
         float result = 0;
         boolean end = false;
         while (!end) {
